@@ -1,0 +1,32 @@
+name: Deploy MkDocs to GitHub Pages
+on:
+  push:
+    branches:
+      - main  # Nebo 'master', podle toho, jakou hlavní větev používáte
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Umožňuje zápis do repozitáře (pro pushnutí built stránek)
+      pages: write # Umožňuje zápis do GitHub Pages
+      id-token: write # Požadováno pro nasazení na GitHub Pages
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x' 
+      
+      - name: Install dependencies
+        run: |
+          # Nainstalujte MkDocs a případné rozšíření (např. mkdocs-material)
+          pip install mkdocs mkdocs-material
+          # Pokud máte speciální požadavky, použijte:
+          # pip install -r requirements.txt
+      
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force
+        # Příkaz 'mkdocs gh-deploy' automaticky vygeneruje stránku a 
+        # pushne ji na větev 'gh-pages', ze které GitHub Pages standardně servíruje.
