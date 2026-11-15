@@ -1,1 +1,70 @@
-site_name: My Docs
+site_name: SimuDocs – ostrovní síť
+site_description: Dokumentace ostrovní sítě pro simulaci letu na Mars
+repo_url: https://github.com/expedicemars/simudocs
+edit_uri: edit/main/docs/   # tlačítko ✏️ na každé stránce otevře editor na GitHubu
+
+theme:
+  name: material
+  language: cs
+  font: false               # žádné Google Fonts – funguje i bez internetu
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - content.action.edit
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      toggle: { icon: material/weather-night, name: Tmavý režim }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      toggle: { icon: material/weather-sunny, name: Světlý režim }
+
+plugins:
+  - search
+  - offline                 # web jde otevřít i ze složky / flashky bez serveru
+
+markdown_extensions:
+  - admonition              # !!! warning "…"  rámečky
+  - pymdownx.details        # ??? rozbalovací bloky
+  - attr_list               # { .md-button } tlačítka v rozhodovacím stromu
+  - md_in_html
+  - tables
+  - toc: { permalink: true }
+  - pymdownx.tasklist: { custom_checkbox: true }
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Úvod: index.md
+  - Zapojení: zapojeni.md
+  - Infrastruktura:
+      - infrastruktura/index.md
+      - Proxmox: infrastruktura/proxmox.md
+      - AD (Windows Server): infrastruktura/ad-server.md
+      - Aplikační server (Debian): infrastruktura/debian-app.md
+      - OPNsense: infrastruktura/opnsense.md
+  - Co dělat, když…:
+      - co-delat-kdyz/index.md
+      - co-delat-kdyz/nejde-sit.md
+      - co-delat-kdyz/server-nebezi.md
+      - co-delat-kdyz/server-bezi.md
+      - co-delat-kdyz/vyreseno.md
+      - co-delat-kdyz/eskalace.md
+  - Pro správce:
+      - Jak upravovat dokumentaci: navody/jak-upravovat.md
+
+# Mermaid přibalený lokálně, aby diagramy fungovaly i bez internetu
+extra_javascript:
+  - assets/js/mermaid.min.js

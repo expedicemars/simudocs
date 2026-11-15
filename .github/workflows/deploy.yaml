@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           # Nainstalujte MkDocs a případné rozšíření (např. mkdocs-material)
-          pip install mkdocs mkdocs-material
+          pip install -r requirements.txt
           # Pokud máte speciální požadavky, použijte:
           # pip install -r requirements.txt
       
